@@ -1,0 +1,29 @@
+{
+  "name": "Ripasso Full-Stack 5F",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+  "forwardPorts": [4200, 5000],
+  "postCreateCommand": "pip install flask mysql-connector-python && npm install -g @angular/cli@22",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql",
+        "ms-python.python",
+        "angular.ng-template"
+      ],
+      "settings": {
+        "sqltools.connections": [{
+          "name": "gamestore", "driver": "MySQL",
+          "server": "127.0.0.1", "port": 3306,
+          "username": "root", "password": "root",
+          "database": "gamestore"
+        }]
+      }
+    }
+  }
+}

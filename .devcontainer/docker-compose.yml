@@ -1,0 +1,17 @@
+services:
+  app:                         # dove lavori tu: Python, Node, Angular
+    image: mcr.microsoft.com/devcontainers/python:3.12
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+    network_mode: service:db   # così MySQL è su 127.0.0.1
+  db:                          # il server MySQL
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: gamestore
+    volumes:
+      - mysql-data:/var/lib/mysql   # i dati restano anche se fermi il Codespace
+volumes:
+  mysql-data:
